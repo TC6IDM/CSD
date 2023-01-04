@@ -170,7 +170,7 @@ class CSDTest {
         assertEquals(1, csd.getNumOfUGradStudents(), "Increment UGrad count in Dept Failed");
     }
     @Test
-    @Order(13)
+    @Order(14)
     void AdmitStudentMultiple(){
         ChairPerson chair = new ChairPerson("Rebert", "Jack", 59, "Male", "Birchmount Road");
         CSD csd = new CSD(chair);
@@ -269,7 +269,6 @@ class CSDTest {
     @Test
     @Order(17)
     void HireTAMultiple(){
-//    	System.out.println("\n\n-----------------------------------------\n\n");
         ChairPerson chair = new ChairPerson("Rebert", "Jack", 59, "Male", "Birchmount Road");
         CSD csd = new CSD(chair);
         Faculty f1 = new Faculty("Elizabeth", "Smith", 53, "Female","Lawrence Avenue East");
@@ -321,7 +320,7 @@ class CSDTest {
         assertEquals(s10.getAdvisor(), f2, "Assign Advisor to Undergrad Failed");
         assertEquals(10, csd.getNumOfGradStudents(), "Increment UGrad count in Dept Failed");
         assertEquals(2, csd.getNumOfFaculty(), "Increment Faculty count in Dept Failed");
-//        System.out.println("\n\n-----------------------------------------\n\n");
+
     }
     @Test
     @Order(18)
@@ -340,8 +339,7 @@ class CSDTest {
             fail();
         }
         assertFalse(f.getAdvisingUgrads().contains(s), "Graduate Undergrad Failed");
-        assertEquals(s.getAdvisor(), f, "Remove Advisor Link Failed"); // are we supposed to remove the advisor for s?
-        //System.out.println(s.getAdvisor()); student.getAdvisor still has a value despite passing the test
+        assertEquals(s.getAdvisor(), f, "Remove Advisor Link Failed");
         assertEquals(0, csd.getNumOfUGradStudents(), "Decrement UGrad count in Dept Failed");
         assertEquals(0, f.getNumOfAdvisingUGrads(), "Decrement UGrad count in Faculty Failed");
     }
@@ -374,7 +372,7 @@ class CSDTest {
             fail();
         }
         assertFalse(f1.getTAs().contains(s1), "Delete Grad Student after graduating failed");
-        assertEquals(s1.getAdvisor(), f1, "Remove Grad Advisor Link failed after graduation"); //same thing here
+        assertEquals(s1.getAdvisor(), f1, "Remove Grad Advisor Link failed after graduation");
         assertEquals(3, csd.getNumOfGradStudents(), "Decrement Grad count in Dept Failed");
         assertEquals(3, f1.getNumOfTAs(), "Decrement Grad count in Faculty Failed");
         Grad s5 = new Grad("George", "Hardy", 45, "Male", "Rockwood Drive");
@@ -402,7 +400,6 @@ class CSDTest {
     @Test
     @Order(20)
     void ExtractAllGradDetails(){
-//    	System.out.println("\n\n-----------------------------------------\n\n");
         ChairPerson chair = new ChairPerson("Rebert", "Jack", 59, "Male", "Birchmount Road");
         CSD csd = new CSD(chair);
         Faculty f1 = new Faculty("Elizabeth", "Smith", 53, "Female","Lawrence Avenue East");
@@ -435,24 +432,11 @@ class CSDTest {
         lst.add(s2);
         lst.add(s1);
         lst.add(s0);
-        
-//        List<Grad> lst2 = (List<Grad>) csd.ExtractAllGradDetails();
-//        
-//        for (int i=0;i<lst.size();i++) {
-//        	System.out.println(lst.get(i));
-//        }
-//        
-//    	System.out.println("\n\n-----------------------------------------\n\n");
-//        for (int i=0;i<lst2.size();i++) {
-//        	System.out.println(lst2.get(i));
-//        	
-//        }
-        assertTrue(lst.equals(csd.ExtractAllGradDetails()), "Extract All Grad Details Failed"); //Is this supposed to be in numerical order?
-//    	System.out.println("\n\n-----------------------------------------\n\n");
+        assertTrue(lst.equals(csd.ExtractAllGradDetails()), "Extract All Grad Details Failed");
     }
     @Test
     @Order(21)
-    void ExtractAllUGradDetails(){
+    void ExtractAllStudentsDetails(){
         ChairPerson chair = new ChairPerson("Rebert", "Jack", 59, "Male", "Birchmount Road");
         CSD csd = new CSD(chair);
         Faculty f1 = new Faculty("Elizabeth", "Smith", 53, "Female","Lawrence Avenue East");
@@ -501,18 +485,7 @@ class CSDTest {
         lst.add(s2);
         lst.add(s3);
         lst.add(s1);
-//        List<Grad> lst2 = (List<Grad>) csd.ExtractAllUGradDetails();
-//        
-//        for (int i=0;i<lst.size();i++) {
-//        	System.out.println(lst.get(i));
-//        }
-//      
-//  		System.out.println("\n\n-----------------------------------------\n\n");
-//  		for (int i=0;i<lst2.size();i++) {
-//  			System.out.println(lst2.get(i));
-//  		}
-  		
-        assertEquals(true ,lst.equals(csd.ExtractAllUGradDetails()), "Extract All Grad Details Failed");
+        assertEquals(true ,lst.equals(csd.ExtractAllStudentsDetails()), "Extract All Grad Details Failed");
     }
     @Test
     @Order(22)
@@ -541,7 +514,7 @@ class CSDTest {
             csd.HireFaculty(f3);
             csd.HireFaculty(f8);
             csd.HireFaculty(f9);
-            csd.HireFaculty(f10); 
+            csd.HireFaculty(f10);
 
         }
         catch(NoSpaceException e){
@@ -735,7 +708,7 @@ class CSDTest {
         assertTrue(lst2.equals(csd.ExtractTAsDetails(f2)), "Extract All TAs of first faculty Failed");
     }
     @Test
-    @Order(25)
+    @Order(26)
     void RetireFacultyReassignTAs(){
         ChairPerson chair = new ChairPerson("Rebert", "Jack", 59, "Male", "Birchmount Road");
         CSD csd = new CSD(chair);
@@ -800,7 +773,7 @@ class CSDTest {
         assertTrue(lst2.equals(csd.ExtractTAsDetails(f2)), "Reassign TAs Failed");
     }
     @Test
-    @Order(26)
+    @Order(27)
     void RetireFacultyReassignUndergrads(){
         ChairPerson chair = new ChairPerson("Rebert", "Jack", 59, "Male", "Birchmount Road");
         CSD csd = new CSD(chair);
@@ -865,9 +838,8 @@ class CSDTest {
     }
     //SPECIAL CASES:
     @Test
-    @Order(27)
+    @Order(28)
     void RetireFacultyNoOtherFacultyInProgramException(){
-//    	System.out.println("-------------------------------------------");
         ChairPerson chair = new ChairPerson("Rebert", "Jack", 59, "Male", "Birchmount Road");
         CSD csd = new CSD(chair);
         ProgramDirector p1 = new ProgramDirector("pd1","lastName", 50, "Male", "Californnia");
@@ -914,10 +886,9 @@ class CSDTest {
             exceptionCaught = true;
         }
         assertTrue(exceptionCaught, "No other prof under Progam Exception Not thrown");
-//    	System.out.println("-------------------------------------------");
     }
     @Test
-    @Order(28)
+    @Order(29)
     void RetireFacultyNoOtherTAException(){
         ChairPerson chair = new ChairPerson("Rebert", "Jack", 59, "Male", "Birchmount Road");
         CSD csd = new CSD(chair);
@@ -959,5 +930,237 @@ class CSDTest {
             exceptionCaught = true;
         }
         assertTrue(exceptionCaught, "No TA under Faculty Exception Not thrown");
+    }
+    @Test
+    @Order(30)
+    void CheckUGradMaxCapacity() throws NoSpaceException{
+        ChairPerson chair = new ChairPerson("Rebert", "Jack", 59, "Male", "Birchmount Road");
+        CSD csd = new CSD(chair);
+        ProgramDirector p1 = new ProgramDirector("pd1","lastName", 50, "Male", "Californnia");
+        p1.setProgram(("Computer Science"));
+        ProgramDirector p2 = new ProgramDirector("pd2","lastName", 50, "Male", "America");
+        p2.setProgram(("Software Engineering"));
+        Faculty f1 = new Faculty("Elizabeth", "Smith", 53, "Female","Lawrence Avenue East");
+        f1.setSalary(25000);
+        f1.setProgram("Computer Science");
+        Faculty f2 = new Faculty("Sean", "Smith", 48, "Male","Avenue East");
+        f2.setProgram("Computer Science");
+        f1.setSalary(35000);
+
+        csd.HireFaculty(f1);
+        csd.HireFaculty(f2);
+        Random rnd = new Random();
+
+        List<UGrad> students = new ArrayList<>();
+
+        for (int i = 0; i < 500; i++){
+            students.add(new UGrad("TestFirstName " + i + ((char) (rnd.nextInt(26) + 65)),
+                    "TestLastName " + ((char) (rnd.nextInt(26) + 65)), rnd.nextInt(100), " ",
+                    "TestAddress" + ((char) (rnd.nextInt(26) + 65))));
+        }
+        for (int i = 0 ;i < 500; i++) {
+            try {
+                csd.AdmitStudent(students.get(i));
+            } catch (NoSpaceException e){
+                fail();
+            }
+        }
+        assertEquals(500, csd.ExtractAllStudentsDetails().size(), "Exception thrown before Max UGrad capacity has been reached");
+    }
+    @Test
+    @Order(31)
+    void ThrowUGradNoSpaceException() throws NoSpaceException{
+        ChairPerson chair = new ChairPerson("Rebert", "Jack", 59, "Male", "Birchmount Road");
+        CSD csd = new CSD(chair);
+        ProgramDirector p1 = new ProgramDirector("pd1","lastName", 50, "Male", "Californnia");
+        p1.setProgram(("Computer Science"));
+        ProgramDirector p2 = new ProgramDirector("pd2","lastName", 50, "Male", "America");
+        p2.setProgram(("Software Engineering"));
+        Faculty f1 = new Faculty("Elizabeth", "Smith", 53, "Female","Lawrence Avenue East");
+        f1.setSalary(25000);
+        f1.setProgram("Computer Science");
+        Faculty f2 = new Faculty("Sean", "Smith", 48, "Male","Avenue East");
+        f2.setProgram("Computer Science");
+        f1.setSalary(35000);
+
+        csd.HireFaculty(f1);
+        csd.HireFaculty(f2);
+        Random rnd = new Random();
+
+        List<UGrad> students = new ArrayList<>();
+
+        for (int i = 0; i < 501; i++){
+            students.add(new UGrad("TestFirstName " + i + ((char) (rnd.nextInt(26) + 65)),
+                    "TestLastName " + ((char) (rnd.nextInt(26) + 65)), rnd.nextInt(100), " ",
+                    "TestAddress" + ((char) (rnd.nextInt(26) + 65))));
+        }
+        int i = 0;
+        for (i = 0 ;i < 500; i++) {
+            try {
+                csd.AdmitStudent(students.get(i));
+            } catch (NoSpaceException e){
+                fail();
+            }
+        }
+        try {
+            csd.AdmitStudent(students.get(i));
+            fail();
+        } catch (NoSpaceException e){
+        }
+        assertEquals(500, csd.ExtractAllStudentsDetails().size(), "Max UGrad capacity exception not thrown");
+    }
+
+    @Test
+    @Order(32)
+    void CheckMaxTACapacity() throws NoSpaceException{
+        ChairPerson chair = new ChairPerson("Rebert", "Jack", 59, "Male", "Birchmount Road");
+        CSD csd = new CSD(chair);
+        ProgramDirector p1 = new ProgramDirector("pd1","lastName", 50, "Male", "Californnia");
+        p1.setProgram(("Computer Science"));
+        ProgramDirector p2 = new ProgramDirector("pd2","lastName", 50, "Male", "America");
+        p2.setProgram(("Software Engineering"));
+        Faculty f1 = new Faculty("Elizabeth", "Smith", 53, "Female","Lawrence Avenue East");
+        f1.setSalary(25000);
+        f1.setProgram("Computer Science");
+        Faculty f2 = new Faculty("Sean", "Smith", 48, "Male","Avenue East");
+        f2.setProgram("Computer Science");
+        f1.setSalary(35000);
+
+        csd.HireFaculty(f1);
+        csd.HireFaculty(f2);
+        Random rnd = new Random();
+
+        List<Grad> tas = new ArrayList<>();
+
+        for (int i = 0; i < 150; i++){
+            tas.add(new Grad("TestFirstName " + i + ((char) (rnd.nextInt(26) + 65)),
+                    "TestLastName " + ((char) (rnd.nextInt(26) + 65)), rnd.nextInt(100), " ",
+                    "TestAddress" + ((char) (rnd.nextInt(26) + 65))));
+        }
+        for (int i = 0 ;i < 150; i++) {
+            try {
+                csd.HireTA(tas.get(i));
+            } catch (NoSpaceException e){
+                fail();
+            }
+        }
+        assertEquals(150, csd.ExtractAllGradDetails().size(), "Exception thrown before Max Grad capacity has been reached");
+    }
+
+    @Test
+    @Order(33)
+    void ThrowTANoSpaceException() throws NoSpaceException{
+        ChairPerson chair = new ChairPerson("Rebert", "Jack", 59, "Male", "Birchmount Road");
+        CSD csd = new CSD(chair);
+        ProgramDirector p1 = new ProgramDirector("pd1","lastName", 50, "Male", "Californnia");
+        p1.setProgram(("Computer Science"));
+        ProgramDirector p2 = new ProgramDirector("pd2","lastName", 50, "Male", "America");
+        p2.setProgram(("Software Engineering"));
+        Faculty f1 = new Faculty("Elizabeth", "Smith", 53, "Female","Lawrence Avenue East");
+        f1.setSalary(25000);
+        f1.setProgram("Computer Science");
+        Faculty f2 = new Faculty("Sean", "Smith", 48, "Male","Avenue East");
+        f2.setProgram("Computer Science");
+        f1.setSalary(35000);
+
+        csd.HireFaculty(f1);
+        csd.HireFaculty(f2);
+        Random rnd = new Random();
+
+        List<Grad> tas = new ArrayList<>();
+
+        for (int i = 0; i < 151; i++){
+            tas.add(new Grad("TestFirstName " + i + ((char) (rnd.nextInt(26) + 65)),
+                    "TestLastName " + ((char) (rnd.nextInt(26) + 65)), rnd.nextInt(100), " ",
+                    "TestAddress" + ((char) (rnd.nextInt(26) + 65))));
+        }
+        int i = 0;
+        for (i = 0 ;i < 150; i++) {
+            try {
+                csd.HireTA(tas.get(i));
+            } catch (NoSpaceException e){
+                fail();
+            }
+        }
+        try {
+            csd.HireTA(tas.get(i));
+            fail();
+        } catch (NoSpaceException e){
+        }
+        assertEquals(150, csd.ExtractAllGradDetails().size(), "Max Grad capacity exception not thrown");
+    }
+
+    @Test
+    @Order(34)
+    void CheckMaxFacultyCapacity() throws NoSpaceException{
+        ChairPerson chair = new ChairPerson("Rebert", "Jack", 59, "Male", "Birchmount Road");
+        CSD csd = new CSD(chair);
+        ProgramDirector p1 = new ProgramDirector("pd1","lastName", 50, "Male", "Californnia");
+        p1.setProgram(("Computer Science"));
+        ProgramDirector p2 = new ProgramDirector("pd2","lastName", 50, "Male", "America");
+        p2.setProgram(("Software Engineering"));
+
+        Random rnd = new Random();
+
+        List<Faculty> faculty = new ArrayList<>();
+
+        for (int i = 0; i < 70; i++){
+            Faculty f = new Faculty("TestFirstName " + i + ((char) (rnd.nextInt(26) + 65)),
+                    "TestLastName " + ((char) (rnd.nextInt(26) + 65)), rnd.nextInt(100), " ",
+                    "TestAddress" + ((char) (rnd.nextInt(26) + 65)));
+            f.setSalary(25000 + rnd.nextInt(10000));
+            f.setProgram("Computer Science");
+            faculty.add(f);
+        }
+        for (int i = 0 ;i < 70; i++) {
+            try {
+                csd.HireFaculty(faculty.get(i));
+            } catch (NoSpaceException e){
+                fail();
+            }
+        }
+        assertEquals(70, csd.ExtractAllFacultyDetails().size(), "Exception thrown before Max Faculty capacity has been reached");
+
+    }
+
+    @Test
+    @Order(35)
+    void ThrowFacultyNoSpaceException() throws NoSpaceException{
+        ChairPerson chair = new ChairPerson("Rebert", "Jack", 59, "Male", "Birchmount Road");
+        CSD csd = new CSD(chair);
+        ProgramDirector p1 = new ProgramDirector("pd1","lastName", 50, "Male", "Californnia");
+        p1.setProgram(("Computer Science"));
+        ProgramDirector p2 = new ProgramDirector("pd2","lastName", 50, "Male", "America");
+        p2.setProgram(("Software Engineering"));
+
+        Random rnd = new Random();
+
+        List<Faculty> faculty = new ArrayList<>();
+
+        for (int i = 0; i < 75; i++){
+            Faculty f = new Faculty("TestFirstName " + i + ((char) (rnd.nextInt(26) + 65)),
+                    "TestLastName " + ((char) (rnd.nextInt(26) + 65)), rnd.nextInt(100), " ",
+                    "TestAddress" + ((char) (rnd.nextInt(26) + 65)));
+            f.setSalary(25000 + rnd.nextInt(10000));
+            f.setProgram("Computer Science");
+            faculty.add(f);
+        }
+        int i = 0;
+        for (i = 0 ;i < 70; i++) {
+            try {
+                csd.HireFaculty(faculty.get(i));
+            } catch (NoSpaceException e){
+                fail();
+            }
+        }
+        for (;i < 75; i++) {
+            try {
+                csd.HireFaculty(faculty.get(i));
+                fail();
+            } catch (NoSpaceException e){
+            }
+        }
+        assertEquals(70, csd.ExtractAllFacultyDetails().size(), "Max Faculty capacity exception not thrown");
+
     }
 }
